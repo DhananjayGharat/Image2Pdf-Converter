@@ -3,57 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to PDF Converter</title>
+    <title>Advanced Image to PDF Converter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 </head>
 <body>
 
     <div class="container">
-        <h1>Image to PDF Converter 🖼️➡️📄</h1>
-        
-        <div class="upload-area">
-            <input type="file" id="file-input" multiple accept="image/png" style="display: none;">
-            <label for="file-input" class="upload-label">Click to Upload PNG Images</label>
-        </div>
-        
-        <p style="color: var(--secondary-color); margin-top: 1rem;">Drag and drop thumbnails to reorder them.</p>
-        <div id="image-list-container">
-            </div>
-        
-        <div class="options">
-            <fieldset class="option-group">
-                <legend>Page Orientation</legend>
-                <div>
-                    <input type="radio" id="portrait" name="orientation" value="p" checked>
-                    <label for="portrait">Portrait</label>
-                </div>
-                <div>
-                    <input type="radio" id="landscape" name="orientation" value="l">
-                    <label for="landscape">Landscape</label>
-                </div>
-            </fieldset>
+        <header>
+            <h1>Advanced PDF Converter</h1>
+            <p>Combine your images into a single, professional PDF</p>
+        </header>
 
-            <fieldset class="option-group">
-                <legend>Page Size</legend>
-                <div>
-                    <input type="radio" id="a4" name="size" value="a4" checked>
-                    <label for="a4">A4</label>
+        <main>
+            <div id="upload-zone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p><b>Drag & drop files here</b> or click to browse</p>
+                <span>PNG, JPG, WEBP supported</span>
+            </div>
+            <input type="file" id="file-input" multiple accept="image/png, image/jpeg, image/webp" hidden>
+            
+            <div id="image-list-container">
                 </div>
-                <div>
-                    <input type="radio" id="letter" name="size" value="letter">
-                    <label for="letter">Letter</label>
-                </div>
-            </fieldset>
-        </div>
-        
-        <button id="convert-btn" disabled>Convert to PDF</button>
+
+            <h2>PDF Options</h2>
+            <div class="options-grid">
+                <fieldset class="option-group">
+                    <legend><i class="fa-solid fa-file-lines"></i> Page</legend>
+                    <div class="select-wrapper">
+                        <select id="page-size">
+                            <option value="a4">A4</option>
+                            <option value="letter">Letter</option>
+                            <option value="legal">Legal</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                         <select id="page-orientation">
+                            <option value="p">Portrait</option>
+                            <option value="l">Landscape</option>
+                        </select>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="option-group">
+                    <legend><i class="fa-solid fa-ruler-combined"></i> Margins</legend>
+                    <label for="page-margin">Margin: <span id="margin-value">10</span> mm</label>
+                    <input type="range" id="page-margin" min="0" max="30" value="10" class="slider">
+                </fieldset>
+
+                 <fieldset class="option-group">
+                    <legend><i class="fa-solid fa-star"></i> Quality</legend>
+                     <div class="select-wrapper">
+                         <select id="image-quality">
+                            <option value="FAST">Low</option>
+                            <option value="MEDIUM" selected>Medium</option>
+                            <option value="SLOW">High</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset class="option-group">
+                    <legend><i class="fa-solid fa-file-signature"></i> Output</legend>
+                    <input type="text" id="file-name" placeholder="Enter file name..." value="converted-document">
+                </fieldset>
+            </div>
+            
+            <div class="actions">
+                <button id="clear-btn" class="btn btn-secondary" disabled><i class="fa-solid fa-trash"></i> Clear All</button>
+                <button id="preview-btn" class="btn btn-secondary" disabled><i class="fa-solid fa-eye"></i> Preview</button>
+                <button id="convert-btn" class="btn btn-primary" disabled><i class="fa-solid fa-file-pdf"></i> Convert & Download</button>
+            </div>
+        </main>
     </div>
 
+    <div id="loader-overlay" class="hidden">
+        <div class="spinner"></div>
+        <p>Generating your PDF...</p>
+    </div>
+
+    <div id="toast-container"></div>
+    
     <script src="script.js"></script>
 </body>
 </html>
