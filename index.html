@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Image to PDF Converter 🖼️➡️📄</h1>
+        
+        <div class="upload-area">
+            <input type="file" id="file-input" multiple accept="image/png" style="display: none;">
+            <label for="file-input" class="upload-label">Click to Upload PNG Images</label>
+        </div>
+        
+        <p style="color: var(--secondary-color); margin-top: 1rem;">Drag and drop thumbnails to reorder them.</p>
+        <div id="image-list-container">
+            </div>
+        
+        <div class="options">
+            <fieldset class="option-group">
+                <legend>Page Orientation</legend>
+                <div>
+                    <input type="radio" id="portrait" name="orientation" value="p" checked>
+                    <label for="portrait">Portrait</label>
+                </div>
+                <div>
+                    <input type="radio" id="landscape" name="orientation" value="l">
+                    <label for="landscape">Landscape</label>
+                </div>
+            </fieldset>
+
+            <fieldset class="option-group">
+                <legend>Page Size</legend>
+                <div>
+                    <input type="radio" id="a4" name="size" value="a4" checked>
+                    <label for="a4">A4</label>
+                </div>
+                <div>
+                    <input type="radio" id="letter" name="size" value="letter">
+                    <label for="letter">Letter</label>
+                </div>
+            </fieldset>
+        </div>
+        
+        <button id="convert-btn" disabled>Convert to PDF</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
